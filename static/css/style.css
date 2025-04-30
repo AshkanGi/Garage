@@ -1382,6 +1382,23 @@ body {
     background-color: #e8f3ff;
 }
 
+.calendar-day.has-event.past-event {
+    background-color: #ffebee;
+    color: #d32f2f;
+}
+
+.calendar-day.has-event.future-event {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.calendar-day.has-event.today-event {
+    background-color: #fff3e0;
+    color: #f57c00;
+    font-weight: bold;
+    box-shadow: 0 0 5px rgba(245, 124, 0, 0.3);
+}
+
 .calendar-day.has-event::after {
     content: '';
     position: absolute;
@@ -1390,6 +1407,20 @@ body {
     height: 4px;
     background-color: #0073b1;
     border-radius: 50%;
+}
+
+.calendar-day.has-event.past-event::after {
+    background-color: #d32f2f;
+}
+
+.calendar-day.has-event.future-event::after {
+    background-color: #2e7d32;
+}
+
+.calendar-day.has-event.today-event::after {
+    background-color: #f57c00;
+    width: 6px;
+    height: 6px;
 }
 
 .calendar-day.today {
@@ -1414,6 +1445,18 @@ body {
     background-color: #f3f2ef;
     border-radius: 8px;
     display: none;
+    position: relative;
+}
+
+.event-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #d32f2f, #f57c00, #2e7d32);
+    border-radius: 4px 4px 0 0;
 }
 
 .event-details.active {
@@ -1442,4 +1485,37 @@ body {
 .event-description {
     color: #333;
     line-height: 1.4;
+}
+
+.event-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.event-status i {
+    font-size: 16px;
+}
+
+.event-status.past {
+    background-color: #ffebee;
+    color: #d32f2f;
+    border-right: 3px solid #d32f2f;
+}
+
+.event-status.today {
+    background-color: #fff3e0;
+    color: #f57c00;
+    border-right: 3px solid #f57c00;
+}
+
+.event-status.future {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border-right: 3px solid #2e7d32;
 }
