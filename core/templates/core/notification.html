@@ -1,10 +1,227 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اعلان‌ها - گاراژ</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <header class="header">
+        <div class="header-left">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجو">
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="#" class="nav-link">
+                <i class="fas fa-warehouse"></i>
+                <span>گاراژ من</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>کلاب</span>
+            </a>
+            <a href="{% url 'core:home' %}" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>خانه</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>پیام‌ها</span>
+            </a>
+            <a href="{% url 'core:notification' %}" class="nav-link active notification-bell">
+                <i class="fas fa-bell"></i>
+                <span>اعلان‌ها</span>
+            </a>
+        </nav>
+    </header>
 
+    <main class="main-content">
+        <div class="sidebar left-sidebar">
+            <div class="profile-card">
+                <div class="background-img"></div>
+                <button class="edit-profile-btn">
+                    <i class="fas fa-pencil-alt"></i>
+                    ویرایش پروفایل
+                </button>
+                <div class="profile-info">
+                    <div class="profile-img-container">
+                        <img src="{% static 'image/porche.jpg' %}" alt="Profile" class="profile-img">
+                    </div>
+                    <div class="profile-text">
+                        <h2>AshkanGhodrati</h2>
+                        <p>bio</p>
+                    </div>
+                    <div class="club-count">
+                        <i class="fas fa-users"></i>
+                        <span> عضو در 3 کلاب </span>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1,234</span>
+                            <small>دنبال‌کننده</small>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-user-plus"></i>
+                            <span>567</span>
+                            <small>دنبال‌شونده</small>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-file-alt"></i>
+                            <span>89</span>
+                            <small>پست</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="center-content">
+            <div class="notification-list">
+                {% comment %} If there are no notifications, show a message {% endcomment %}
+                <div class="no-notifications" style="display:none; text-align:center; color:#888; padding:32px; font-size:16px;">
+                    هیچ اعلانی وجود ندارد!
+                </div>
+                <!-- Unread Notifications -->
+                <div class="notification-group">
+                    <h3>اعلان‌های خوانده نشده</h3>
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-text">
+                                <strong>علی محمدی</strong> درخواست دوستی برای شما ارسال کرده است.
+                            </p>
+                            <span class="notification-time">2 ساعت پیش</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="action-btn accept">
+                                <i class="fas fa-check"></i>
+                                قبول
+                            </button>
+                            <button class="action-btn decline">
+                                <i class="fas fa-times"></i>
+                                رد
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="notification-item unread">
+                        <div class="notification-icon">
+                            <i class="fas fa-comment"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-text">
+                                <strong>سارا احمدی</strong> روی پست شما نظر داده است: "ماشین زیبایی است!"
+                            </p>
+                            <span class="notification-time">3 ساعت پیش</span>
+                        </div>
+                        <div class="notification-actions">
+                            <button class="action-btn reply">
+                                <i class="fas fa-reply"></i>
+                                پاسخ
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Read Notifications -->
+                <div class="notification-group">
+                    <h3>اعلان‌های خوانده شده</h3>
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-text">
+                                <strong>محمد رضایی</strong> پست شما را لایک کرده است.
+                            </p>
+                            <span class="notification-time">دیروز</span>
+                        </div>
+                    </div>
+
+                    <div class="notification-item">
+                        <div class="notification-icon">
+                            <i class="fas fa-share"></i>
+                        </div>
+                        <div class="notification-content">
+                            <p class="notification-text">
+                                <strong>نازنین کریمی</strong> پست شما را به اشتراک گذاشته است.
+                            </p>
+                            <span class="notification-time">2 روز پیش</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <aside class="sidebar right-sidebar">
+            <div class="notification-actions-box">
+                <button class="action-btn delete-all">
+                    <i class="fas fa-trash"></i>
+                    حذف همه
+                </button>
+                <button class="action-btn mark-all-read">
+                    <i class="fas fa-check-double"></i>
+                    خواندن همه
+                </button>
+            </div>
+            <div class="suggested-users">
+                <div class="suggested-title">
+                    <i class="fas fa-user-plus"></i>
+                    <h3>پیشنهاد دنبال کردن</h3>
+                </div>
+                <div class="user-list">
+                    <div class="user-item">
+                        <img src="{% static 'image/porche.jpg' %}" alt="User1" class="user-avatar">
+                        <div class="user-info">
+                            <h4>محمد امینی</h4>
+                            <div class="mutual-clubs"><i class="fas fa-users"></i> 2 کلاب مشترک</div>
+                        </div>
+                        <button class="follow-btn">دنبال کردن +</button>
+                    </div>
+                    <div class="user-item">
+                        <img src="{% static 'image/porche.jpg' %}" alt="User2" class="user-avatar">
+                        <div class="user-info">
+                            <h4>سارا رضایی</h4>
+                            <div class="mutual-clubs"><i class="fas fa-users"></i> 1 کلاب مشترک</div>
+                        </div>
+                        <button class="follow-btn">دنبال کردن +</button>
+                    </div>
+                    <div class="user-item">
+                        <img src="{% static 'image/porche.jpg' %}" alt="User3" class="user-avatar">
+                        <div class="user-info">
+                            <h4>علی کریمی</h4>
+                            <div class="mutual-clubs"><i class="fas fa-users"></i> 3 کلاب مشترک</div>
+                        </div>
+                        <button class="follow-btn">دنبال کردن +</button>
+                    </div>
+                    <div class="user-item">
+                        <img src="{% static 'image/porche.jpg' %}" alt="User4" class="user-avatar">
+                        <div class="user-info">
+                            <h4>زهرا احمدی</h4>
+                            <div class="mutual-clubs"><i class="fas fa-users"></i> 4 کلاب مشترک</div>
+                        </div>
+                        <button class="follow-btn">دنبال کردن +</button>
+                    </div>
+                    <div class="user-item">
+                        <img src="{% static 'image/porche.jpg' %}" alt="User5" class="user-avatar">
+                        <div class="user-info">
+                            <h4>رضا محمدی</h4>
+                            <div class="mutual-clubs"><i class="fas fa-users"></i> 2 کلاب مشترک</div>
+                        </div>
+                        <button class="follow-btn">دنبال کردن +</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+    <script src="{% static 'js/script.js' %}"></script>
 </body>
 </html>
