@@ -1,0 +1,324 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.1">
+    <script src="{% static 'js/script.js' %}"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجو">
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="#" class="nav-link">
+                <i class="fas fa-warehouse"></i>
+                <span>گاراژ من</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>کلاب</span>
+            </a>
+            <a href="#" class="nav-link active">
+                <i class="fas fa-home"></i>
+                <span>خانه</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-comment-dots"></i>
+                <span>پیام‌ها</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>اعلان‌ها</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Left Sidebar -->
+        <div class="sidebar left-sidebar">
+            <div class="profile-card">
+                <div class="background-img"></div>
+                <button class="edit-profile-btn">
+                    <i class="fas fa-pencil-alt"></i>
+                    ویرایش پروفایل
+                </button>
+                <div class="profile-info">
+                    <div class="profile-img-container">
+                        <img src="{% static 'image/porche.jpg' %}" alt="Profile" class="profile-img">
+                    </div>
+                    <div class="profile-text">
+                        <h2>AshkanGhodrati</h2>
+                        <p>bio</p>
+                    </div>
+                    <div class="club-count">
+                        <i class="fas fa-users"></i>
+                        <span> عضو در 3 کلاب </span>
+                    </div>
+                    <div class="profile-stats">
+                        <div class="stat">
+                            <i class="fas fa-user-friends"></i>
+                            <span>1,234</span>
+                            <small>دنبال‌کننده</small>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-user-plus"></i>
+                            <span>567</span>
+                            <small>دنبال‌شونده</small>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-file-alt"></i>
+                            <span>89</span>
+                            <small>پست</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Calendar Section -->
+            <div class="calendar-section">
+                <h3 class="calendar-title">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>تقویم همایش‌ها</span>
+                </h3>
+                <div class="calendar-container">
+                    <div class="calendar-header">
+                        <button class="calendar-nav" id="prevMonth"><i class="fas fa-chevron-right"></i></button>
+                        <h4 id="currentMonth">فروردین ۱۴۰۳</h4>
+                        <button class="calendar-nav" id="nextMonth"><i class="fas fa-chevron-left"></i></button>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="calendar-weekdays">
+                            <span>ش</span>
+                            <span>ی</span>
+                            <span>د</span>
+                            <span>س</span>
+                            <span>چ</span>
+                            <span>پ</span>
+                            <span>ج</span>
+                        </div>
+                        <div class="calendar-days" id="calendarDays">
+                            <!-- Days will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+                <div class="event-details" id="eventDetails">
+                    <h4>جزئیات همایش</h4>
+                    <div class="event-content">
+                        <p class="event-title"></p>
+                        <p class="event-time"></p>
+                        <p class="event-location"></p>
+                        <p class="event-description"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Center Content -->
+        <section class="center-content">
+            <!-- Create Post -->
+            <div class="create-post">
+                <div class="post-input">
+                    <img src="{% static 'image/porche.jpg' %}" alt="Profile" class="profile-img">
+                    <button>پست جدید بنویسید</button>
+                </div>
+                <div class="post-actions">
+                    <button><i class="fas fa-image"></i> عکس</button>
+                    <button><i class="fas fa-video"></i> ویدیو</button>
+                    <button><i class="fas fa-newspaper"></i> نوشته</button>
+                </div>
+            </div>
+
+            <!-- Post Section -->
+            <div class="post" role="article">
+                <div class="post-header">
+                    <div class="post-user">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل کاربر" class="user-avatar" loading="lazy">
+                        <div class="user-info">
+                            <div class="post-info-header">
+                                <h3>نام کاربر</h3>
+                                <button class="follow-btn" aria-label="دنبال کردن کاربر">
+                                    <span>دنبال کردن</span>
+                                </button>
+                            </div>
+                            <div class="post-meta">
+                                <span><i class="fas fa-clock" aria-hidden="true"></i> ۲ ساعت پیش</span>
+                                <span><i class="fas fa-map-marker-alt" aria-hidden="true"></i> تهران، ایران</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-menu">
+                        <i class="fas fa-ellipsis-h"></i>
+                        <div class="menu-dropdown">
+                            <button><i class="fas fa-flag"></i>گزارش</button>
+                            <button><i class="fas fa-ban"></i>مسدود کردن</button>
+                            <button><i class="fas fa-share"></i>اشتراک‌گذاری</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <p>این یک نمونه متن پست است که می‌تواند شامل متن، تصاویر و لینک‌ها باشد.</p>
+                    <div class="post-tags" role="list">
+                        <span class="tag" role="listitem">#تگ1</span>
+                        <span class="tag" role="listitem">#تگ2</span>
+                        <span class="tag" role="listitem">#تگ3</span>
+                    </div>
+                    <div class="post-gallery">
+                        <img src="{% static 'image/porche.jpg' %}" alt="تصویر پست" loading="lazy">
+                    </div>
+                </div>
+                <div class="post-actions" role="toolbar">
+                    <button class="action-btn like-btn" aria-label="پسندیدن پست">
+                        <i class="far fa-thumbs-up" aria-hidden="true"></i>
+                        <span>پسندیدن</span>
+                    </button>
+                    <button class="action-btn comment-btn" aria-label="نظر دادن">
+                        <i class="far fa-comment" aria-hidden="true"></i>
+                        <span>نظر</span>
+                    </button>
+                    <button class="action-btn share-btn" aria-label="اشتراک‌گذاری پست">
+                        <i class="far fa-share-square" aria-hidden="true"></i>
+                        <span>اشتراک‌گذاری</span>
+                    </button>
+                    <button class="action-btn save-btn" aria-label="ذخیره پست">
+                        <i class="far fa-bookmark" aria-hidden="true"></i>
+                        <span>ذخیره</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Right Sidebar -->
+        <aside class="right-sidebar">
+            <!-- News Box -->
+            <div class="sidebar-box">
+                <div class="news-container">
+                    <h3 class="news-title"><i class="fas fa-newspaper"></i>اخبار دورهمی ها</h3>
+                    <ul class="news-list">
+                        <li class="news-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="RT Club" class="news-icon">
+                            <div class="news-content">
+                                <p>میتینگ کلاب RT کلاب</p>
+                                <span><i class="fas fa-clock"></i>1 ساعت پیش</span>
+                                <span><i class="fas fa-map-marker-alt"></i>تهران</span>
+                            </div>
+                            <i class="fas fa-chevron-left news-arrow"></i>
+                        </li>
+                        <li class="news-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="Classic Club" class="news-icon">
+                            <div class="news-content">
+                                <p>میتینگ کلاسیک باز ها</p>
+                                <span><i class="fas fa-clock"></i>2 ساعت پیش</span>
+                                <span><i class="fas fa-map-marker-alt"></i>اصفهان</span>
+                            </div>
+                            <i class="fas fa-chevron-left news-arrow"></i>
+                        </li>
+                        <li class="news-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="Japanese Club" class="news-icon">
+                            <div class="news-content">
+                                <p>میتینگ ژاپنی</p>
+                                <span><i class="fas fa-clock"></i>3 ساعت پیش</span>
+                                <span><i class="fas fa-map-marker-alt"></i>شیراز</span>
+                            </div>
+                            <i class="fas fa-chevron-left news-arrow"></i>
+                        </li>
+                        <li class="news-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="American Club" class="news-icon">
+                            <div class="news-content">
+                                <p>میتینگ امریکایی</p>
+                                <span><i class="fas fa-clock"></i>4 ساعت پیش</span>
+                                <span><i class="fas fa-map-marker-alt"></i>مشهد</span>
+                            </div>
+                            <i class="fas fa-chevron-left news-arrow"></i>
+                        </li>
+                        <li class="news-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="Pars Club" class="news-icon">
+                            <div class="news-content">
+                                <p>میتینگ پارس سوار ها</p>
+                                <span><i class="fas fa-clock"></i>5 ساعت پیش</span>
+                                <span><i class="fas fa-map-marker-alt"></i>کرج</span>
+                            </div>
+                            <i class="fas fa-chevron-left news-arrow"></i>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Suggested Users Box -->
+            <div class="sidebar-box">
+                <div class="suggested-users">
+                    <h3 class="suggested-title">
+                        <i class="fas fa-user-plus"></i>
+                        <span>پیشنهاد برای دنبال کردن</span>
+                    </h3>
+                    <ul class="user-list">
+                        <li class="user-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
+                            <div class="user-info">
+                                <h4>پورشه 911</h4>
+                                <p>ماشین اسپرت کلاسیک</p>
+                                <div class="common-clubs">
+                                    <span><i class="fas fa-users"></i>3 کلاب مشترک</span>
+                                </div>
+                            </div>
+                            <button class="follow-btn">دنبال کردن</button>
+                        </li>
+                        <li class="user-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
+                            <div class="user-info">
+                                <h4>پورشه کاین</h4>
+                                <p>شاسی بلند لوکس</p>
+                                <div class="common-clubs">
+                                    <span><i class="fas fa-users"></i>2 کلاب مشترک</span>
+                                </div>
+                            </div>
+                            <button class="follow-btn">دنبال کردن</button>
+                        </li>
+                        <li class="user-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
+                            <div class="user-info">
+                                <h4>پورشه تایکان</h4>
+                                <p>سوپراسپرت الکتریکی</p>
+                                <div class="common-clubs">
+                                    <span><i class="fas fa-users"></i>4 کلاب مشترک</span>
+                                </div>
+                            </div>
+                            <button class="follow-btn">دنبال کردن</button>
+                        </li>
+                        <li class="user-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
+                            <div class="user-info">
+                                <h4>پورشه پانامرا</h4>
+                                <p>سدان لوکس</p>
+                                <div class="common-clubs">
+                                    <span><i class="fas fa-users"></i>2 کلاب مشترک</span>
+                                </div>
+                            </div>
+                            <button class="follow-btn">دنبال کردن</button>
+                        </li>
+                        <li class="user-item">
+                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
+                            <div class="user-info">
+                                <h4>پورشه ماکان</h4>
+                                <p>کراس‌اوور اسپرت</p>
+                                <div class="common-clubs">
+                                    <span><i class="fas fa-users"></i>3 کلاب مشترک</span>
+                                </div>
+                            </div>
+                            <button class="follow-btn">دنبال کردن</button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+    </main>
+</body>
+</html>
