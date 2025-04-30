@@ -281,123 +281,125 @@
 
         <!-- Right Sidebar -->
         <aside class="right-sidebar">
-            <!-- News Box -->
+            <!-- News Tabs -->
             <div class="sidebar-box">
-                <div class="news-container">
-                    <h3 class="news-title"><i class="fas fa-newspaper"></i>اخبار دورهمی ها</h3>
-                    <ul class="news-list">
-                        <li class="news-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="RT Club" class="news-icon">
-                            <div class="news-content">
-                                <p>میتینگ کلاب RT کلاب</p>
-                                <span><i class="fas fa-clock"></i>1 ساعت پیش</span>
-                                <span><i class="fas fa-map-marker-alt"></i>تهران</span>
+                <div class="news-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-button active" data-tab="meetings">
+                            <i class="fas fa-users"></i>
+                            اخبار دورهمی‌ها
+                        </button>
+                        <button class="tab-button" data-tab="world">
+                            <i class="fas fa-globe"></i>
+                            اخبار روز دنیا
+                        </button>
+                    </div>
+                    
+                    <!-- Meetings News Tab -->
+                    <div class="tab-content active" id="meetings-tab">
+                        <div class="news-container">
+                            <ul class="news-list">
+                                <li class="news-item">
+                                    <div class="news-image">
+                                        <img src="{% static 'image/porche.jpg' %}" alt="RT Club" class="news-icon">
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>میتینگ کلاب RT کلاب</h4>
+                                        <div class="news-meta">
+                                            <span><i class="fas fa-clock"></i>1 ساعت پیش</span>
+                                            <span><i class="fas fa-map-marker-alt"></i>تهران</span>
+                                        </div>
+                                        <p class="news-description">همایش ماهانه کلاب RT با حضور اعضای فعال و نمایش خودروهای کلاسیک</p>
+                                    </div>
+                                </li>
+                                <li class="news-item">
+                                    <div class="news-image">
+                                        <img src="{% static 'image/porche.jpg' %}" alt="Classic Club" class="news-icon">
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>میتینگ کلاسیک باز ها</h4>
+                                        <div class="news-meta">
+                                            <span><i class="fas fa-clock"></i>2 ساعت پیش</span>
+                                            <span><i class="fas fa-map-marker-alt"></i>اصفهان</span>
+                                        </div>
+                                        <p class="news-description">گردهمایی سالانه کلاسیک‌بازان با نمایش بیش از 50 خودرو کلاسیک</p>
+                                    </div>
+                                </li>
+                                <li class="news-item">
+                                    <div class="news-image">
+                                        <img src="{% static 'image/porche.jpg' %}" alt="Japanese Club" class="news-icon">
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>میتینگ ژاپنی</h4>
+                                        <div class="news-meta">
+                                            <span><i class="fas fa-clock"></i>3 ساعت پیش</span>
+                                            <span><i class="fas fa-map-marker-alt"></i>شیراز</span>
+                                        </div>
+                                        <p class="news-description">همایش خودروهای ژاپنی با حضور نمایندگان رسمی برندها</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="view-more-container">
+                                <button class="view-more-btn">
+                                    <span>مشاهده اخبار بیشتر</span>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
                             </div>
-                            <i class="fas fa-chevron-left news-arrow"></i>
-                        </li>
-                        <li class="news-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="Classic Club" class="news-icon">
-                            <div class="news-content">
-                                <p>میتینگ کلاسیک باز ها</p>
-                                <span><i class="fas fa-clock"></i>2 ساعت پیش</span>
-                                <span><i class="fas fa-map-marker-alt"></i>اصفهان</span>
+                        </div>
+                    </div>
+
+                    <!-- World News Tab -->
+                    <div class="tab-content" id="world-tab">
+                        <div class="news-container">
+                            <ul class="news-list">
+                                <li class="news-item">
+                                    <div class="news-image">
+                                        <img src="{% static 'image/porche.jpg' %}" alt="World News" class="news-icon">
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>رونمایی از جدیدترین مدل پورشه 911</h4>
+                                        <div class="news-meta">
+                                            <span><i class="fas fa-clock"></i>1 ساعت پیش</span>
+                                            <span><i class="fas fa-globe"></i>آلمان</span>
+                                        </div>
+                                        <p class="news-description">رونمایی از نسل جدید پورشه 911 با قابلیت‌های پیشرفته و طراحی مدرن</p>
+                                    </div>
+                                </li>
+                                <li class="news-item">
+                                    <div class="news-image">
+                                        <img src="{% static 'image/porche.jpg' %}" alt="World News" class="news-icon">
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>نمایشگاه خودروی ژنو 2024</h4>
+                                        <div class="news-meta">
+                                            <span><i class="fas fa-clock"></i>2 ساعت پیش</span>
+                                            <span><i class="fas fa-globe"></i>سوئیس</span>
+                                        </div>
+                                        <p class="news-description">نمایشگاه بین‌المللی خودرو ژنو با حضور برندهای مطرح جهان</p>
+                                    </div>
+                                </li>
+                                <li class="news-item">
+                                    <div class="news-image">
+                                        <img src="{% static 'image/porche.jpg' %}" alt="World News" class="news-icon">
+                                    </div>
+                                    <div class="news-content">
+                                        <h4>تست درایو جدیدترین مدل فراری</h4>
+                                        <div class="news-meta">
+                                            <span><i class="fas fa-clock"></i>3 ساعت پیش</span>
+                                            <span><i class="fas fa-globe"></i>ایتالیا</span>
+                                        </div>
+                                        <p class="news-description">اولین تست درایو سوپراسپرت جدید فراری با عملکرد خیره‌کننده</p>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="view-more-container">
+                                <button class="view-more-btn">
+                                    <span>مشاهده اخبار بیشتر</span>
+                                    <i class="fas fa-chevron-left"></i>
+                                </button>
                             </div>
-                            <i class="fas fa-chevron-left news-arrow"></i>
-                        </li>
-                        <li class="news-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="Japanese Club" class="news-icon">
-                            <div class="news-content">
-                                <p>میتینگ ژاپنی</p>
-                                <span><i class="fas fa-clock"></i>3 ساعت پیش</span>
-                                <span><i class="fas fa-map-marker-alt"></i>شیراز</span>
-                            </div>
-                            <i class="fas fa-chevron-left news-arrow"></i>
-                        </li>
-                        <li class="news-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="American Club" class="news-icon">
-                            <div class="news-content">
-                                <p>میتینگ امریکایی</p>
-                                <span><i class="fas fa-clock"></i>4 ساعت پیش</span>
-                                <span><i class="fas fa-map-marker-alt"></i>مشهد</span>
-                            </div>
-                            <i class="fas fa-chevron-left news-arrow"></i>
-                        </li>
-                        <li class="news-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="Pars Club" class="news-icon">
-                            <div class="news-content">
-                                <p>میتینگ پارس سوار ها</p>
-                                <span><i class="fas fa-clock"></i>5 ساعت پیش</span>
-                                <span><i class="fas fa-map-marker-alt"></i>کرج</span>
-                            </div>
-                            <i class="fas fa-chevron-left news-arrow"></i>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <!-- Suggested Users Box -->
-            <div class="sidebar-box">
-                <div class="suggested-users">
-                    <h3 class="suggested-title">
-                        <i class="fas fa-user-plus"></i>
-                        <span>پیشنهاد برای دنبال کردن</span>
-                    </h3>
-                    <ul class="user-list">
-                        <li class="user-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
-                            <div class="user-info">
-                                <h4>پورشه 911</h4>
-                                <p>ماشین اسپرت کلاسیک</p>
-                                <div class="common-clubs">
-                                    <span><i class="fas fa-users"></i>3 کلاب مشترک</span>
-                                </div>
-                            </div>
-                            <button class="follow-btn">دنبال کردن</button>
-                        </li>
-                        <li class="user-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
-                            <div class="user-info">
-                                <h4>پورشه کاین</h4>
-                                <p>شاسی بلند لوکس</p>
-                                <div class="common-clubs">
-                                    <span><i class="fas fa-users"></i>2 کلاب مشترک</span>
-                                </div>
-                            </div>
-                            <button class="follow-btn">دنبال کردن</button>
-                        </li>
-                        <li class="user-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
-                            <div class="user-info">
-                                <h4>پورشه تایکان</h4>
-                                <p>سوپراسپرت الکتریکی</p>
-                                <div class="common-clubs">
-                                    <span><i class="fas fa-users"></i>4 کلاب مشترک</span>
-                                </div>
-                            </div>
-                            <button class="follow-btn">دنبال کردن</button>
-                        </li>
-                        <li class="user-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
-                            <div class="user-info">
-                                <h4>پورشه پانامرا</h4>
-                                <p>سدان لوکس</p>
-                                <div class="common-clubs">
-                                    <span><i class="fas fa-users"></i>2 کلاب مشترک</span>
-                                </div>
-                            </div>
-                            <button class="follow-btn">دنبال کردن</button>
-                        </li>
-                        <li class="user-item">
-                            <img src="{% static 'image/porche.jpg' %}" alt="User" class="user-avatar">
-                            <div class="user-info">
-                                <h4>پورشه ماکان</h4>
-                                <p>کراس‌اوور اسپرت</p>
-                                <div class="common-clubs">
-                                    <span><i class="fas fa-users"></i>3 کلاب مشترک</span>
-                                </div>
-                            </div>
-                            <button class="follow-btn">دنبال کردن</button>
-                        </li>
-                    </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </aside>
