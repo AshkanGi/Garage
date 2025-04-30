@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkedIn Clone</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=1.1">
-    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/script.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -125,16 +125,98 @@
 
         <!-- Center Content -->
         <section class="center-content">
-            <!-- Create Post -->
-            <div class="create-post">
-                <div class="post-input">
-                    <img src="{% static 'image/porche.jpg' %}" alt="Profile" class="profile-img">
-                    <button>پست جدید بنویسید</button>
+            <!-- Suggested Clubs -->
+            <div class="suggested-clubs">
+                <div class="clubs-header">
+                    <h3><i class="fas fa-chevron-down"></i> کلاب‌های پیشنهادی</h3>
                 </div>
-                <div class="post-actions">
-                    <button><i class="fas fa-image"></i> عکس</button>
-                    <button><i class="fas fa-video"></i> ویدیو</button>
-                    <button><i class="fas fa-newspaper"></i> نوشته</button>
+                <div class="clubs-grid">
+                    <div class="club-item">
+                        <div class="club-image">
+                            <img src="/static/image/porche.jpg" alt="پورشه">
+                        </div>
+                        <div class="club-info">
+                            <h4>پورشه <span class="club-type">خودروی لوکس</span></h4>
+                            <div class="members">
+                                <i class="fas fa-users"></i>
+                                <span>1.2K عضو</span>
+                            </div>
+                            <div class="club-stats">
+                                <span><i class="fas fa-map-marker-alt"></i> تهران</span>
+                                <span><i class="fas fa-star"></i> 4.8</span>
+                            </div>
+                            <button class="join-btn">
+                                <i class="fas fa-plus"></i>
+                                <span>عضویت</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="club-item">
+                        <div class="club-image">
+                            <img src="/static/image/porche.jpg" alt="مرسدس">
+                        </div>
+                        <div class="club-info">
+                            <h4>مرسدس <span class="club-type">خودروی لوکس</span></h4>
+                            <div class="members">
+                                <i class="fas fa-users"></i>
+                                <span>980 عضو</span>
+                            </div>
+                            <div class="club-stats">
+                                <span><i class="fas fa-map-marker-alt"></i> اصفهان</span>
+                                <span><i class="fas fa-star"></i> 4.6</span>
+                            </div>
+                            <button class="join-btn">
+                                <i class="fas fa-plus"></i>
+                                <span>عضویت</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="club-item">
+                        <div class="club-image">
+                            <img src="/static/image/porche.jpg" alt="بی‌ام‌و">
+                        </div>
+                        <div class="club-info">
+                            <h4>بی‌ام‌و <span class="club-type">خودروی اسپرت</span></h4>
+                            <div class="members">
+                                <i class="fas fa-users"></i>
+                                <span>1.5K عضو</span>
+                            </div>
+                            <div class="club-stats">
+                                <span><i class="fas fa-map-marker-alt"></i> شیراز</span>
+                                <span><i class="fas fa-star"></i> 4.9</span>
+                            </div>
+                            <button class="join-btn">
+                                <i class="fas fa-plus"></i>
+                                <span>عضویت</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="club-item">
+                        <div class="club-image">
+                            <img src="/static/image/porche.jpg" alt="آئودی">
+                        </div>
+                        <div class="club-info">
+                            <h4>آئودی <span class="club-type">خودروی اسپرت</span></h4>
+                            <div class="members">
+                                <i class="fas fa-users"></i>
+                                <span>850 عضو</span>
+                            </div>
+                            <div class="club-stats">
+                                <span><i class="fas fa-map-marker-alt"></i> مشهد</span>
+                                <span><i class="fas fa-star"></i> 4.7</span>
+                            </div>
+                            <button class="join-btn">
+                                <i class="fas fa-plus"></i>
+                                <span>عضویت</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="view-all-clubs">
+                    <a href="#">
+                        <span>مشاهده همه کلاب‌ها</span>
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
                 </div>
             </div>
 

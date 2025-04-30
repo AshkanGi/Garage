@@ -127,6 +127,31 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.classList.remove('show');
         });
     });
+
+    // Clubs dropdown functionality
+    const clubsHeader = document.querySelector('.clubs-header');
+    const clubsGrid = document.querySelector('.clubs-grid');
+    const viewAllClubs = document.querySelector('.view-all-clubs');
+
+    if (clubsHeader && clubsGrid && viewAllClubs) {
+        // ابتدا همه المان‌ها را مخفی می‌کنیم
+        clubsGrid.style.display = 'none';
+        viewAllClubs.style.display = 'none';
+
+        clubsHeader.addEventListener('click', function() {
+            // تغییر وضعیت active
+            this.classList.toggle('active');
+            
+            // نمایش یا مخفی کردن المان‌ها
+            if (this.classList.contains('active')) {
+                clubsGrid.style.display = 'grid';
+                viewAllClubs.style.display = 'block';
+            } else {
+                clubsGrid.style.display = 'none';
+                viewAllClubs.style.display = 'none';
+            }
+        });
+    }
 });
 
 // Calendar Functionality
