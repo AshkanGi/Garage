@@ -127,29 +127,141 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.classList.remove('show');
         });
     });
+
+    // Clubs dropdown functionality
+    const clubsHeader = document.querySelector('.clubs-header');
+    const clubsGrid = document.querySelector('.clubs-grid');
+    const viewAllClubs = document.querySelector('.view-all-clubs');
+
+    if (clubsHeader && clubsGrid && viewAllClubs) {
+        // ابتدا همه المان‌ها را مخفی می‌کنیم
+        clubsGrid.style.display = 'none';
+        viewAllClubs.style.display = 'none';
+
+        clubsHeader.addEventListener('click', function() {
+            // تغییر وضعیت active
+            this.classList.toggle('active');
+            
+            // نمایش یا مخفی کردن المان‌ها
+            if (this.classList.contains('active')) {
+                clubsGrid.style.display = 'grid';
+                viewAllClubs.style.display = 'block';
+            } else {
+                clubsGrid.style.display = 'none';
+                viewAllClubs.style.display = 'none';
+            }
+        });
+    }
+
+    // News Tabs Functionality
+    const tabButtons = document.querySelectorAll('.tab-button');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Remove active class from all buttons and contents
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked button
+            button.classList.add('active');
+
+            // Show corresponding content
+            const tabId = button.getAttribute('data-tab');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        });
+    });
 });
 
 // Calendar Functionality
 const events = {
-    '2024-03-15': {
-        title: 'همایش کلاسیک‌بازان',
-        time: '۱۴:۰۰ تا ۱۸:۰۰',
-        location: 'تهران، پارکینگ مرکزی',
-        description: 'همایش سالانه کلاسیک‌بازان با حضور بیش از ۵۰ خودرو کلاسیک'
+    // رویدادهای گذشته (قبل از 15 بهمن)
+    '2024-01-10': {
+        title: 'نمایشگاه خودروهای کلاسیک',
+        time: '۱۰:۰۰ تا ۲۰:۰۰',
+        location: 'تهران، نمایشگاه بین‌المللی',
+        description: 'نمایشگاه خودروهای کلاسیک با حضور کلکسیونرهای برجسته'
     },
-    '2024-03-20': {
+    '2024-01-15': {
+        title: 'مسابقه رالی',
+        time: '۰۸:۰۰ تا ۱۸:۰۰',
+        location: 'مشهد، پیست رالی',
+        description: 'مسابقه رالی با حضور تیم‌های حرفه‌ای'
+    },
+    '2024-01-20': {
+        title: 'همایش خودروهای اسپرت',
+        time: '۱۶:۰۰ تا ۲۲:۰۰',
+        location: 'اصفهان، پیست سرعت',
+        description: 'همایش خودروهای اسپرت با حضور برندهای معروف'
+    },
+    '2024-01-25': {
+        title: 'کارگاه تعمیر موتور',
+        time: '۰۹:۰۰ تا ۱۳:۰۰',
+        location: 'شیراز، مرکز تعمیرات تخصصی',
+        description: 'کارگاه آموزشی تعمیر و نگهداری موتورهای اسپرت'
+    },
+    '2024-01-30': {
+        title: 'نمایشگاه لوازم یدکی',
+        time: '۱۰:۰۰ تا ۱۸:۰۰',
+        location: 'تهران، نمایشگاه لوازم یدکی',
+        description: 'نمایشگاه لوازم یدکی با تخفیف ویژه'
+    },
+
+    // رویدادهای آینده (بعد از 15 بهمن)
+    '2024-02-15': {
         title: 'مسابقه نمایشی',
         time: '۱۰:۰۰ تا ۱۷:۰۰',
         location: 'اصفهان، پیست سرعت',
         description: 'مسابقه نمایشی با حضور رانندگان حرفه‌ای'
     },
-    '2024-03-25': {
+    '2024-02-20': {
+        title: 'همایش کلاسیک‌بازان',
+        time: '۱۴:۰۰ تا ۱۸:۰۰',
+        location: 'تهران، پارکینگ مرکزی',
+        description: 'همایش سالانه کلاسیک‌بازان با حضور بیش از ۵۰ خودرو کلاسیک'
+    },
+    '2024-02-25': {
         title: 'کارگاه تعمیر و نگهداری',
         time: '۰۹:۰۰ تا ۱۳:۰۰',
         location: 'شیراز، مرکز تعمیرات تخصصی',
         description: 'کارگاه آموزشی تعمیر و نگهداری خودروهای لوکس'
+    },
+    '2024-02-30': {
+        title: 'نمایشگاه خودروهای لوکس',
+        time: '۱۰:۰۰ تا ۲۰:۰۰',
+        location: 'تهران، نمایشگاه بین‌المللی',
+        description: 'نمایشگاه خودروهای لوکس با حضور برندهای معروف'
     }
 };
+
+// اضافه کردن رویداد امروز
+const today = new Date();
+const todayString = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+events[todayString] = {
+    title: 'رویداد امروز',
+    time: '۱۰:۰۰ تا ۱۸:۰۰',
+    location: 'تهران، پارکینگ مرکزی',
+    description: 'رویداد ویژه امروز'
+};
+
+function getEventStatus(dateString) {
+    const eventDate = new Date(dateString);
+    const today = new Date();
+    const feb15 = new Date('2024-02-15'); // تغییر تاریخ مرجع به 15 بهمن
+    
+    // تنظیم ساعت‌ها به 0 برای مقایسه دقیق تاریخ
+    eventDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    feb15.setHours(0, 0, 0, 0);
+    
+    if (eventDate.getTime() === today.getTime()) {
+        return 'today-event';
+    } else if (eventDate < feb15) {
+        return 'past-event';
+    } else {
+        return 'future-event';
+    }
+}
 
 function initCalendar() {
     const calendarDays = document.getElementById('calendarDays');
@@ -185,9 +297,10 @@ function initCalendar() {
             const dateString = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
             const hasEvent = events[dateString];
             const isToday = day === currentDate.getDate() && currentMonth === currentDate.getMonth() && currentYear === currentDate.getFullYear();
+            const eventStatus = hasEvent ? getEventStatus(dateString) : '';
             
             calendarHTML += `
-                <div class="calendar-day ${hasEvent ? 'has-event' : ''} ${isToday ? 'today' : ''}" 
+                <div class="calendar-day ${hasEvent ? 'has-event' : ''} ${isToday ? 'today' : ''} ${eventStatus}" 
                      data-date="${dateString}">
                     ${day}
                 </div>`;
@@ -201,8 +314,42 @@ function initCalendar() {
                 const date = day.dataset.date;
                 if (events[date]) {
                     const event = events[date];
+                    const eventDate = new Date(date);
+                    const today = new Date();
+                    const feb15 = new Date('2024-02-15');
+                    
+                    // تنظیم ساعت‌ها به 0 برای مقایسه دقیق تاریخ
+                    eventDate.setHours(0, 0, 0, 0);
+                    today.setHours(0, 0, 0, 0);
+                    feb15.setHours(0, 0, 0, 0);
+                    
+                    let statusBadge = '';
+                    if (eventDate < feb15) {
+                        statusBadge = `
+                            <div class="event-status past">
+                                <i class="fas fa-history"></i>
+                                <span>این رویداد به پایان رسیده است</span>
+                            </div>
+                        `;
+                    } else if (eventDate.getTime() === today.getTime()) {
+                        statusBadge = `
+                            <div class="event-status today">
+                                <i class="fas fa-clock"></i>
+                                <span>رویداد امروز</span>
+                            </div>
+                        `;
+                    } else {
+                        statusBadge = `
+                            <div class="event-status future">
+                                <i class="fas fa-calendar-check"></i>
+                                <span>رویداد آینده</span>
+                            </div>
+                        `;
+                    }
+                    
                     eventDetails.innerHTML = `
                         <h4>جزئیات همایش</h4>
+                        ${statusBadge}
                         <div class="event-content">
                             <p class="event-title">${event.title}</p>
                             <p class="event-time"><i class="far fa-clock"></i> ${event.time}</p>
