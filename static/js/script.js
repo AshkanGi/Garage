@@ -180,31 +180,36 @@ const events = {
         title: 'نمایشگاه خودروهای کلاسیک',
         time: '۱۰:۰۰ تا ۲۰:۰۰',
         location: 'تهران، نمایشگاه بین‌المللی',
-        description: 'نمایشگاه خودروهای کلاسیک با حضور کلکسیونرهای برجسته'
+        description: 'نمایشگاه خودروهای کلاسیک با حضور کلکسیونرهای برجسته',
+        club: 'کلاب خودروهای کلاسیک'
     },
     '2024-01-15': {
         title: 'مسابقه رالی',
         time: '۰۸:۰۰ تا ۱۸:۰۰',
         location: 'مشهد، پیست رالی',
-        description: 'مسابقه رالی با حضور تیم‌های حرفه‌ای'
+        description: 'مسابقه رالی با حضور تیم‌های حرفه‌ای',
+        club: 'کلاب رالی ایران'
     },
     '2024-01-20': {
         title: 'همایش خودروهای اسپرت',
         time: '۱۶:۰۰ تا ۲۲:۰۰',
         location: 'اصفهان، پیست سرعت',
-        description: 'همایش خودروهای اسپرت با حضور برندهای معروف'
+        description: 'همایش خودروهای اسپرت با حضور برندهای معروف',
+        club: 'کلاب خودروهای اسپرت'
     },
     '2024-01-25': {
         title: 'کارگاه تعمیر موتور',
         time: '۰۹:۰۰ تا ۱۳:۰۰',
         location: 'شیراز، مرکز تعمیرات تخصصی',
-        description: 'کارگاه آموزشی تعمیر و نگهداری موتورهای اسپرت'
+        description: 'کارگاه آموزشی تعمیر و نگهداری موتورهای اسپرت',
+        club: 'کلاب مکانیک‌های حرفه‌ای'
     },
     '2024-01-30': {
         title: 'نمایشگاه لوازم یدکی',
         time: '۱۰:۰۰ تا ۱۸:۰۰',
         location: 'تهران، نمایشگاه لوازم یدکی',
-        description: 'نمایشگاه لوازم یدکی با تخفیف ویژه'
+        description: 'نمایشگاه لوازم یدکی با تخفیف ویژه',
+        club: 'کلاب قطعات خودرو'
     },
 
     // رویدادهای آینده (بعد از 15 بهمن)
@@ -212,25 +217,29 @@ const events = {
         title: 'مسابقه نمایشی',
         time: '۱۰:۰۰ تا ۱۷:۰۰',
         location: 'اصفهان، پیست سرعت',
-        description: 'مسابقه نمایشی با حضور رانندگان حرفه‌ای'
+        description: 'مسابقه نمایشی با حضور رانندگان حرفه‌ای',
+        club: 'کلاب رانندگان حرفه‌ای'
     },
     '2024-02-20': {
         title: 'همایش کلاسیک‌بازان',
         time: '۱۴:۰۰ تا ۱۸:۰۰',
         location: 'تهران، پارکینگ مرکزی',
-        description: 'همایش سالانه کلاسیک‌بازان با حضور بیش از ۵۰ خودرو کلاسیک'
+        description: 'همایش سالانه کلاسیک‌بازان با حضور بیش از ۵۰ خودرو کلاسیک',
+        club: 'کلاب خودروهای کلاسیک'
     },
     '2024-02-25': {
         title: 'کارگاه تعمیر و نگهداری',
         time: '۰۹:۰۰ تا ۱۳:۰۰',
         location: 'شیراز، مرکز تعمیرات تخصصی',
-        description: 'کارگاه آموزشی تعمیر و نگهداری خودروهای لوکس'
+        description: 'کارگاه آموزشی تعمیر و نگهداری خودروهای لوکس',
+        club: 'کلاب مکانیک‌های حرفه‌ای'
     },
     '2024-02-30': {
         title: 'نمایشگاه خودروهای لوکس',
         time: '۱۰:۰۰ تا ۲۰:۰۰',
         location: 'تهران، نمایشگاه بین‌المللی',
-        description: 'نمایشگاه خودروهای لوکس با حضور برندهای معروف'
+        description: 'نمایشگاه خودروهای لوکس با حضور برندهای معروف',
+        club: 'کلاب خودروهای لوکس'
     }
 };
 
@@ -268,11 +277,129 @@ function initCalendar() {
     const currentMonthElement = document.getElementById('currentMonth');
     const prevMonthBtn = document.getElementById('prevMonth');
     const nextMonthBtn = document.getElementById('nextMonth');
-    const eventDetails = document.getElementById('eventDetails');
     
     let currentDate = new Date();
     let currentMonth = currentDate.getMonth();
     let currentYear = currentDate.getFullYear();
+
+    // ایجاد المان برای نمایش جزئیات رویداد
+    const eventDetailsContainer = document.createElement('div');
+    eventDetailsContainer.className = 'event-details';
+    eventDetailsContainer.style.display = 'none';
+    document.querySelector('.calendar-container').appendChild(eventDetailsContainer);
+
+    function closeEventDetails() {
+        eventDetailsContainer.classList.add('hide');
+        setTimeout(() => {
+            eventDetailsContainer.style.display = 'none';
+            eventDetailsContainer.classList.remove('hide');
+        }, 300);
+    }
+
+    function showEventDetails(event, date) {
+        if (!event) {
+            // نمایش پیام "رویدادی وجود ندارد"
+            eventDetailsContainer.innerHTML = `
+                <div class="event-header">
+                    <h4>جزئیات روز</h4>
+                    <button class="close-event-btn">×</button>
+                </div>
+                <div class="no-event-message">
+                    <i class="fas fa-calendar-times"></i>
+                    رویدادی برای این روز وجود ندارد
+                </div>
+            `;
+            
+            eventDetailsContainer.style.display = 'block';
+            eventDetailsContainer.classList.add('show');
+            
+            // اضافه کردن event listener برای دکمه بستن
+            const closeBtn = eventDetailsContainer.querySelector('.close-event-btn');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeEventDetails);
+            }
+            return;
+        }
+
+        const eventDate = new Date(date);
+        const today = new Date();
+        const feb15 = new Date('2024-02-15');
+        
+        // تنظیم ساعت‌ها به 0 برای مقایسه دقیق تاریخ
+        eventDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+        feb15.setHours(0, 0, 0, 0);
+        
+        let statusBadge = '';
+        if (eventDate < feb15) {
+            statusBadge = `
+                <div class="event-status past">
+                    <i class="fas fa-history"></i>
+                    <span>این رویداد به پایان رسیده است</span>
+                </div>
+            `;
+        } else if (eventDate.getTime() === today.getTime()) {
+            statusBadge = `
+                <div class="event-status today">
+                    <i class="fas fa-clock"></i>
+                    <span>رویداد امروز</span>
+                </div>
+            `;
+        } else {
+            statusBadge = `
+                <div class="event-status future">
+                    <i class="fas fa-calendar-check"></i>
+                    <span>رویداد آینده</span>
+                </div>
+            `;
+        }
+        
+        eventDetailsContainer.innerHTML = `
+            <div class="event-header">
+                <h4>${event.title}</h4>
+                <button class="close-event-btn">×</button>
+            </div>
+            <div class="event-body">
+                ${statusBadge}
+                <div class="event-club">
+                    <i class="fas fa-users"></i>
+                    <span>${event.club}</span>
+                </div>
+                <div class="event-info">
+                    <div class="event-info-item">
+                        <i class="fas fa-clock"></i>
+                        <div class="event-info-content">
+                            <h5>زمان برگزاری</h5>
+                            <p>${event.time}</p>
+                        </div>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div class="event-info-content">
+                            <h5>محل برگزاری</h5>
+                            <p>${event.location}</p>
+                        </div>
+                    </div>
+                    <div class="event-info-item">
+                        <i class="fas fa-info-circle"></i>
+                        <div class="event-info-content">
+                            <h5>درباره رویداد</h5>
+                            <p>${event.description}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        eventDetailsContainer.style.display = 'block';
+        eventDetailsContainer.classList.add('show');
+        
+        // اضافه کردن event listener برای دکمه بستن
+        const closeBtn = eventDetailsContainer.querySelector('.close-event-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', closeEventDetails);
+        }
+    }
 
     function updateCalendar() {
         const firstDay = new Date(currentYear, currentMonth, 1);
@@ -308,59 +435,11 @@ function initCalendar() {
         
         calendarDays.innerHTML = calendarHTML;
         
-        // Add click event listeners to days
+        // اضافه کردن event listener برای همه روزها
         document.querySelectorAll('.calendar-day').forEach(day => {
             day.addEventListener('click', () => {
                 const date = day.dataset.date;
-                if (events[date]) {
-                    const event = events[date];
-                    const eventDate = new Date(date);
-                    const today = new Date();
-                    const feb15 = new Date('2024-02-15');
-                    
-                    // تنظیم ساعت‌ها به 0 برای مقایسه دقیق تاریخ
-                    eventDate.setHours(0, 0, 0, 0);
-                    today.setHours(0, 0, 0, 0);
-                    feb15.setHours(0, 0, 0, 0);
-                    
-                    let statusBadge = '';
-                    if (eventDate < feb15) {
-                        statusBadge = `
-                            <div class="event-status past">
-                                <i class="fas fa-history"></i>
-                                <span>این رویداد به پایان رسیده است</span>
-                            </div>
-                        `;
-                    } else if (eventDate.getTime() === today.getTime()) {
-                        statusBadge = `
-                            <div class="event-status today">
-                                <i class="fas fa-clock"></i>
-                                <span>رویداد امروز</span>
-                            </div>
-                        `;
-                    } else {
-                        statusBadge = `
-                            <div class="event-status future">
-                                <i class="fas fa-calendar-check"></i>
-                                <span>رویداد آینده</span>
-                            </div>
-                        `;
-                    }
-                    
-                    eventDetails.innerHTML = `
-                        <h4>جزئیات همایش</h4>
-                        ${statusBadge}
-                        <div class="event-content">
-                            <p class="event-title">${event.title}</p>
-                            <p class="event-time"><i class="far fa-clock"></i> ${event.time}</p>
-                            <p class="event-location"><i class="fas fa-map-marker-alt"></i> ${event.location}</p>
-                            <p class="event-description">${event.description}</p>
-                        </div>
-                    `;
-                    eventDetails.classList.add('active');
-                } else {
-                    eventDetails.classList.remove('active');
-                }
+                showEventDetails(events[date], date);
             });
         });
     }
