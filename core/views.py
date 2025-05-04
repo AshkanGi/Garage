@@ -10,3 +10,8 @@ class Home(View):
 class Notification(View):
     def get(self, request):
         return render(request, 'core/notification.html')
+
+
+class Messages(View):
+    def get(self, request):
+        return render(request, 'core/messages.html')

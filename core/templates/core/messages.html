@@ -1,0 +1,170 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیام‌ها - LinkedIn Clone</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/messages.css">
+    <script src="/static/js/script.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجو در پیام‌ها">
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="#" class="nav-link">
+                <i class="fas fa-warehouse"></i>
+                <span>گاراژ من</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>کلاب</span>
+            </a>
+            <a href="{% url 'core:home' %}" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>خانه</span>
+            </a>
+            <a href="#" class="nav-link active">
+                <i class="fas fa-comment-dots"></i>
+                <span>پیام‌ها</span>
+            </a>
+            <a href="{% url 'core:notification' %}" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>اعلان‌ها</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content messages-page">
+        <!-- Messages Sidebar -->
+        <div class="messages-sidebar">
+            <div class="messages-header">
+                <h2>پیام‌ها</h2>
+                <button class="new-message-btn">
+                    <i class="fas fa-plus"></i>
+                    پیام جدید
+                </button>
+            </div>
+            
+            <div class="conversations-list">
+                <!-- Conversation Item -->
+                <div class="conversation-item active">
+                    <div class="conversation-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                        <span class="online-status"></span>
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>علی محمدی</h3>
+                            <span class="time">۲ ساعت پیش</span>
+                        </div>
+                        <p class="last-message">سلام! چطور می‌تونم به کلاب پورشه ملحق شم؟</p>
+                    </div>
+                </div>
+
+                <!-- More Conversation Items -->
+                <div class="conversation-item">
+                    <div class="conversation-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>سارا احمدی</h3>
+                            <span class="time">دیروز</span>
+                        </div>
+                        <p class="last-message">آیا می‌تونید در مورد مرسدس جدید راهنمایی کنید؟</p>
+                    </div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="conversation-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>محمد رضایی</h3>
+                            <span class="time">۲ روز پیش</span>
+                        </div>
+                        <p class="last-message">ممنون از راهنمایی‌های شما در مورد بی‌ام‌و</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <div class="chat-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                        <span class="online-status"></span>
+                    </div>
+                    <div class="chat-user-details">
+                        <h2>علی محمدی</h2>
+                        <p>آنلاین</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-phone"></i>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-video"></i>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="messages-container">
+                <!-- Message Bubbles -->
+                <div class="message-bubble received">
+                    <div class="message-content">
+                        <p>سلام! چطور می‌تونم به کلاب پورشه ملحق شم؟</p>
+                        <span class="message-time">۲ ساعت پیش</span>
+                    </div>
+                </div>
+
+                <div class="message-bubble sent">
+                    <div class="message-content">
+                        <p>سلام! برای عضویت در کلاب پورشه، می‌تونید از صفحه اصلی روی دکمه "عضویت" کلیک کنید و فرم درخواست رو پر کنید.</p>
+                        <span class="message-time">۲ ساعت پیش</span>
+                    </div>
+                </div>
+
+                <div class="message-bubble received">
+                    <div class="message-content">
+                        <p>ممنون! آیا نیاز به تایید خاصی هست؟</p>
+                        <span class="message-time">۱ ساعت پیش</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-input">
+                <div class="input-actions">
+                    <button class="action-btn">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="action-btn">
+                        <i class="fas fa-image"></i>
+                    </button>
+                </div>
+                <input type="text" placeholder="پیام خود را بنویسید...">
+                <button class="send-btn">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
