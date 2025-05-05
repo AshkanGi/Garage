@@ -1,0 +1,199 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>پیام‌ها - گاراژ</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="جستجو">
+            </div>
+        </div>
+        <nav class="header-nav">
+            <a href="#" class="nav-link">
+                <i class="fas fa-warehouse"></i>
+                <span>گاراژ من</span>
+            </a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-users"></i>
+                <span>کلاب</span>
+            </a>
+            <a href="{% url 'core:home' %}" class="nav-link">
+                <i class="fas fa-home"></i>
+                <span>خانه</span>
+            </a>
+            <a href="{% url 'core:messages' %}" class="nav-link active">
+                <i class="fas fa-comment-dots"></i>
+                <span>پیام‌ها</span>
+            </a>
+            <a href="{% url 'core:notification' %}" class="nav-link">
+                <i class="fas fa-bell"></i>
+                <span>اعلان‌ها</span>
+            </a>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content messages-page">
+        <!-- Messages Sidebar -->
+        <div class="messages-sidebar">
+            <div class="search-section" style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="جستجو در گفتگوها">
+                </div>
+                <button class="hamburger-btn" id="sidebarMenuBtn" style="background: none; border: none; font-size: 24px; cursor: pointer; margin-right: 10px;">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="sidebar-menu" id="sidebarMenu" style="display: none; position: absolute; top: 60px; right: 30px; background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.12); border-radius: 10px; min-width: 200px; z-index: 2000;">
+                    <button class="sidebar-menu-item" id="changeChatBgBtn" style="width: 100%; padding: 12px 20px; border: none; background: none; text-align: right; font-size: 15px; cursor: pointer; border-bottom: 1px solid #eee;">تغییر بک‌گراند چت</button>
+                    <!-- گزینه‌های دیگر منو در صورت نیاز -->
+                </div>
+            </div>
+            <div class="conversations-list">
+                <!-- Conversation Item -->
+                <div class="conversation-item active">
+                    <div class="conversation-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>علی محمدی</h3>
+                            <span class="time">۲ ساعت پیش</span>
+                        </div>
+                        <p class="last-message">سلام! چطور می‌تونم به کلاب پورشه ملحق شم؟</p>
+                    </div>
+                </div>
+
+                <!-- More Conversation Items -->
+                <div class="conversation-item">
+                    <div class="conversation-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>سارا احمدی</h3>
+                            <span class="time">دیروز</span>
+                        </div>
+                        <p class="last-message">آیا می‌تونید در مورد مرسدس جدید راهنمایی کنید؟</p>
+                    </div>
+                </div>
+
+                <div class="conversation-item">
+                    <div class="conversation-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                    </div>
+                    <div class="conversation-info">
+                        <div class="conversation-header">
+                            <h3>محمد رضایی</h3>
+                            <span class="time">۲ روز پیش</span>
+                        </div>
+                        <p class="last-message">ممنون از راهنمایی‌های شما در مورد بی‌ام‌و</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-area">
+            <div class="chat-bg-control" style="padding: 10px 20px; background: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 10px;">
+                <label for="chatBgInput">بک‌گراند چت:</label>
+                <input type="file" id="chatBgInput" accept="image/*" style="display: inline-block;" />
+                <input type="text" id="chatBgUrlInput" placeholder="یا آدرس عکس را وارد کنید..." style="flex:1; padding: 5px 10px; border-radius: 6px; border: 1px solid #ccc;" />
+                <button id="setChatBgBtn" style="padding: 6px 16px; border-radius: 6px; border: none; background: #0a66c2; color: #fff; cursor: pointer;">اعمال</button>
+            </div>
+            <div class="chat-header">
+                <div class="chat-user-info">
+                    <div class="chat-avatar">
+                        <img src="{% static 'image/porche.jpg' %}" alt="عکس پروفایل">
+                    </div>
+                    <div class="chat-user-details">
+                        <h2>علی محمدی</h2>
+                        <p>آخرین بازدید: ۲ ساعت پیش</p>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <button class="action-btn menu-btn">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <div class="chat-menu">
+                        <button class="menu-item">
+                            <i class="fas fa-archive"></i>
+                            آرشیو گفتگو
+                        </button>
+                        <button class="menu-item">
+                            <i class="fas fa-bell-slash"></i>
+                            بی‌صدا کردن
+                        </button>
+                        <button class="menu-item">
+                            <i class="fas fa-trash"></i>
+                            حذف گفتگو
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="messages-container">
+                <!-- Message Bubbles -->
+                <div class="message-bubble received">
+                    <div class="message-content">
+                        <p>سلام! چطور می‌تونم به کلاب پورشه ملحق شم؟</p>
+                        <span class="message-time">۲ ساعت پیش</span>
+                    </div>
+                </div>
+
+                <div class="message-bubble sent">
+                    <div class="message-content">
+                        <p>سلام! برای عضویت در کلاب پورشه، می‌تونید از صفحه اصلی روی دکمه "عضویت" کلیک کنید و فرم درخواست رو پر کنید.</p>
+                        <span class="message-time">۲ ساعت پیش</span>
+                    </div>
+                </div>
+
+                <div class="message-bubble received">
+                    <div class="message-content">
+                        <p>ممنون! آیا نیاز به تایید خاصی هست؟</p>
+                        <span class="message-time">۱ ساعت پیش</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-input">
+                <div class="input-actions">
+                    <button class="action-btn" id="attachFile">
+                        <i class="fas fa-paperclip"></i>
+                    </button>
+                    <button class="action-btn" id="attachImage">
+                        <i class="fas fa-image"></i>
+                    </button>
+                </div>
+                <input type="text" placeholder="پیام خود را بنویسید..." id="messageInput">
+                <button class="send-btn" id="sendMessage">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+
+            <!-- File Upload Preview -->
+            <div class="file-preview" style="display: none;">
+                <img src="" alt="Preview" id="filePreview">
+                <div class="file-info">
+                    <div class="file-name">نام فایل</div>
+                    <div class="file-size">سایز فایل</div>
+                </div>
+                <button class="action-btn" id="removeFile">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
