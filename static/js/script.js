@@ -171,6 +171,214 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById(`${tabId}-tab`).classList.add('active');
         });
     });
+
+    // Chat Menu Toggle
+    const menuBtn = document.querySelector('.chat-actions .action-btn');
+    const chatMenu = document.querySelector('.chat-menu');
+
+    if (menuBtn && chatMenu) {
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            chatMenu.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function() {
+            chatMenu.classList.remove('show');
+        });
+
+        // Prevent menu from closing when clicking inside it
+        chatMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
+
+    // Chat Functionality
+    const messageInput = document.getElementById('messageInput');
+    const sendButton = document.getElementById('sendMessage');
+    const messagesContainer = document.querySelector('.messages-container');
+    const attachFileBtn = document.getElementById('attachFile');
+    const attachImageBtn = document.getElementById('attachImage');
+    const filePreview = document.querySelector('.file-preview');
+    const filePreviewImg = document.getElementById('filePreview');
+    const fileName = document.querySelector('.file-name');
+    const fileSize = document.querySelector('.file-size');
+    const removeFileBtn = document.getElementById('removeFile');
+    let selectedFile = null;
+
+    // Send Message
+    function sendMessage() {
+        const message = messageInput.value.trim();
+        if (message || selectedFile) {
+            const messageBubble = document.createElement('div');
+            messageBubble.className = 'message-bubble sent';
+            
+            let content = `<div class="message-content">`;
+            
+            if (message) {
+                content += `<p>${message}</p>`;
+            }
+            
+            if (selectedFile) {
+                if (selectedFile.type.startsWith('image/')) {
+                    content += `<img src="${URL.createObjectURL(selectedFile)}" alt="Uploaded Image" style="max-width: 200px; border-radius: 8px; margin-top: 8px;">`;
+                } else {
+                    content += `
+                        <div class="file-preview" style="margin-top: 8px;">
+                            <i class="fas fa-file" style="font-size: 24px; color: #666;"></i>
+                            <div class="file-info">
+                                <div class="file-name">${selectedFile.name}</div>
+                                <div class="file-size">${formatFileSize(selectedFile.size)}</div>
+                            </div>
+                        </div>
+                    `;
+                }
+            }
+            
+            content += `
+                <span class="message-time">${getCurrentTime()}</span>
+                <span class="message-status"><i class="fas fa-check"></i></span>
+            </div>`;
+            
+            messageBubble.innerHTML = content;
+            messagesContainer.appendChild(messageBubble);
+            
+            // Clear input and file
+            messageInput.value = '';
+            clearFilePreview();
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+            
+            // Simulate typing indicator
+            showTypingIndicator();
+        }
+    }
+
+    // Format file size
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    // Get current time
+    function getCurrentTime() {
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        return `${hours}:${minutes}`;
+    }
+
+    // Show typing indicator
+    function showTypingIndicator() {
+        const typingIndicator = document.querySelector('.typing-indicator');
+        typingIndicator.style.display = 'flex';
+        
+        setTimeout(() => {
+            typingIndicator.style.display = 'none';
+        }, 2000);
+    }
+
+    // Handle file selection
+    function handleFileSelect(file) {
+        selectedFile = file;
+        
+        if (file.type.startsWith('image/')) {
+            filePreviewImg.src = URL.createObjectURL(file);
+            filePreviewImg.style.display = 'block';
+        } else {
+            filePreviewImg.style.display = 'none';
+        }
+        
+        fileName.textContent = file.name;
+        fileSize.textContent = formatFileSize(file.size);
+        filePreview.style.display = 'flex';
+    }
+
+    // Clear file preview
+    function clearFilePreview() {
+        selectedFile = null;
+        filePreview.style.display = 'none';
+        filePreviewImg.src = '';
+        fileName.textContent = '';
+        fileSize.textContent = '';
+    }
+
+    // Event Listeners
+    sendButton.addEventListener('click', sendMessage);
+    
+    messageInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    attachFileBtn.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.onchange = (e) => handleFileSelect(e.target.files[0]);
+        input.click();
+    });
+
+    attachImageBtn.addEventListener('click', function() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = (e) => handleFileSelect(e.target.files[0]);
+        input.click();
+    });
+
+    removeFileBtn.addEventListener('click', clearFilePreview);
+
+    // Auto-scroll to bottom on load
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+    const chatArea = document.querySelector('.chat-area');
+    const fileInput = document.getElementById('chatBgInput');
+    const urlInput = document.getElementById('chatBgUrlInput');
+    const setBtn = document.getElementById('setChatBgBtn');
+
+    // تغییر بک‌گراند با انتخاب فایل
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(evt) {
+                chatArea.style.setProperty('background', `linear-gradient(rgba(30,32,36,0.55), rgba(30,32,36,0.55)), url('${evt.target.result}') center center/cover no-repeat`, 'important');
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // تغییر بک‌گراند با وارد کردن آدرس عکس
+    setBtn.addEventListener('click', function() {
+        const url = urlInput.value.trim();
+        if (url) {
+            chatArea.style.setProperty('background', `linear-gradient(rgba(30,32,36,0.55), rgba(30,32,36,0.55)), url('${url}') center center/cover no-repeat`, 'important');
+        }
+    });
+
+    // Hamburger sidebar menu functionality
+    const sidebarMenuBtn = document.getElementById('sidebarMenuBtn');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    if (sidebarMenuBtn && sidebarMenu) {
+        sidebarMenuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            sidebarMenu.style.display = (sidebarMenu.style.display === 'block') ? 'none' : 'block';
+        });
+        // Close menu when clicking outside
+        document.addEventListener('click', function() {
+            sidebarMenu.style.display = 'none';
+        });
+        // Prevent menu from closing when clicking inside
+        sidebarMenu.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    }
 });
 
 // Calendar Functionality
